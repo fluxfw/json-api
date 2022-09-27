@@ -1,0 +1,12 @@
+{
+    "name": "flux-json-api",
+    "productName": "flux-json-api",
+    "version": "2022-09-27-1",
+    "description": "",
+    "keywords": [],
+    "homepage": "",
+    "peerDependencies": {
+        "flux-fetch-api": "*"
+    },
+    "private": true
+}
