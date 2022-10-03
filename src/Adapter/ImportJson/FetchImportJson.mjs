@@ -1,6 +1,7 @@
-import { FetchApi } from "../../../../flux-fetch-api/src/Adapter/Api/FetchApi.mjs";
 import { ImportJson } from "./ImportJson.mjs";
-import { JsonCache } from "../Cache/JsonCache.mjs";
+
+/** @typedef {import("../../../../flux-fetch-api/src/Adapter/Api/FetchApi.mjs").FetchApi} FetchApi */
+/** @typedef {import("../Cache/JsonCache.mjs").JsonCache} JsonCache */
 
 export class FetchImportJson extends ImportJson {
     /**
