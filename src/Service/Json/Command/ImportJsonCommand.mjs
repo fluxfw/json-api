@@ -1,4 +1,4 @@
-import { ImportJson } from "../../../Adapter/ImportJson/ImportJson.mjs";
+/** @typedef {import("../../../Adapter/ImportJson/ImportJson.mjs").ImportJson} ImportJson */
 
 export class ImportJsonCommand {
     /**

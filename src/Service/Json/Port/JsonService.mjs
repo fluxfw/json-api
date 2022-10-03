@@ -1,5 +1,6 @@
-import { ImportJson } from "../../../Adapter/ImportJson/ImportJson.mjs";
 import { ImportJsonCommand } from "../Command/ImportJsonCommand.mjs";
+
+/** @typedef {import("../../../Adapter/ImportJson/ImportJson.mjs").ImportJson} ImportJson */
 
 export class JsonService {
     /**
