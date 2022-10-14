@@ -6,6 +6,12 @@ Changes:
 
 \-
 
+## v2022-10-14-1
+
+Changes:
+
+- Reenable assert import for Chromium based browsers
+
 ## v2022-10-03-1
 
 Changes:
