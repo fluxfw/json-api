@@ -65,16 +65,20 @@ export class JsonApi {
      * @returns {Promise<ImportJson>}
      */
     async #getImportJson() {
-        /*try {
-            return (await import("../ImportJson/AssertImportJson.mjs")).AssertImportJson.new();
+        try {
+            if (navigator.userAgentData?.brands?.some(brand => brand.brand === "Chromium") ?? false) {
+                return (await import("../ImportJson/AssertImportJson.mjs")).AssertImportJson.new();
+            }
         } catch (error) {
-            console.info("Unsupported assert import - Using fetch fallback (", error, ")");*/
+            console.error(error);
+        }
+
+        console.info("Unsupported assert import - Using fetch fallback")
 
         return (await import("../ImportJson/FetchImportJson.mjs")).FetchImportJson.new(
             this.#fetch_api,
             this.#json_cache
         );
-        //}
     }
 
     /**
