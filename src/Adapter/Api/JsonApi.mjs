@@ -73,7 +73,7 @@ export class JsonApi {
             console.error(error);
         }
 
-        console.info("Unsupported assert import - Using fetch fallback")
+        console.info("Unsupported assert import - Using fetch fallback");
 
         return (await import("../ImportJson/FetchImportJson.mjs")).FetchImportJson.new(
             this.#fetch_api,
