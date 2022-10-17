@@ -1,8 +1,8 @@
 import { JsonCache } from "../Cache/JsonCache.mjs";
-import { JsonService } from "../../Service/Json/Port/JsonService.mjs";
 
 /** @typedef {import("../../../../flux-fetch-api/src/Adapter/Api/FetchApi.mjs").FetchApi} FetchApi */
 /** @typedef {import("../ImportJson/ImportJson.mjs").ImportJson} ImportJson */
+/** @typedef {import("../../Service/Json/Port/JsonService.mjs").JsonService} JsonService */
 
 export class JsonApi {
     /**
@@ -48,7 +48,7 @@ export class JsonApi {
 
         this.#import_json ??= await this.#getImportJson();
 
-        this.#json_service ??= this.#getJsonService();
+        this.#json_service ??= await this.#getJsonService();
     }
 
     /**
@@ -82,10 +82,10 @@ export class JsonApi {
     }
 
     /**
-     * @returns {JsonService}
+     * @returns {Promise<JsonService>}
      */
-    #getJsonService() {
-        return JsonService.new(
+    async #getJsonService() {
+        return (await import("../../Service/Json/Port/JsonService.mjs")).JsonService.new(
             this.#import_json
         );
     }

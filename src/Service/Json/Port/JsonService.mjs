@@ -1,5 +1,3 @@
-import { ImportJsonCommand } from "../Command/ImportJsonCommand.mjs";
-
 /** @typedef {import("../../../Adapter/ImportJson/ImportJson.mjs").ImportJson} ImportJson */
 
 export class JsonService {
@@ -31,7 +29,7 @@ export class JsonService {
      * @returns {Promise<*>}
      */
     async importJson(url) {
-        return ImportJsonCommand.new(
+        return (await import("../Command/ImportJsonCommand.mjs")).ImportJsonCommand.new(
             this.#import_json
         )
             .importJson(
