@@ -1,5 +1,5 @@
 /**
- * @extends Map<string, *>
+ * @augments Map<string, *>
  */
 export class JsonCache extends Map {
 
