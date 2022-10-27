@@ -66,7 +66,7 @@ export class JsonApi {
      */
     async #getImportJson() {
         try {
-            if (navigator.userAgentData?.brands?.some(brand => brand.brand === "Chromium") ?? false) {
+            if (typeof process !== "undefined" || (navigator.userAgentData?.brands?.some(brand => brand.brand === "Chromium") ?? false)) {
                 return (await import("../ImportJson/AssertImportJson.mjs")).AssertImportJson.new();
             }
         } catch (error) {
