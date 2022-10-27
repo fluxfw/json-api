@@ -6,6 +6,12 @@ Changes:
 
 \-
 
+## v2022-10-27-1
+
+Changes:
+
+- Enable assert import for NodeJS
+
 ## v2022-10-19-1
 
 Changes:
