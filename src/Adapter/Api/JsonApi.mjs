@@ -45,10 +45,6 @@ export class JsonApi {
      */
     async init() {
         this.#json_cache ??= new JsonCache();
-
-        this.#import_json ??= await this.#getImportJson();
-
-        this.#json_service ??= await this.#getJsonService();
     }
 
     /**
@@ -56,7 +52,7 @@ export class JsonApi {
      * @returns {Promise<*>}
      */
     async importJson(url) {
-        return this.#json_service.importJson(
+        return (await this.#getJsonService()).importJson(
             url
         );
     }
@@ -65,28 +61,36 @@ export class JsonApi {
      * @returns {Promise<ImportJson>}
      */
     async #getImportJson() {
-        try {
-            if (typeof process !== "undefined" || (navigator.userAgentData?.brands?.some(brand => brand.brand === "Chromium") ?? false)) {
-                return (await import("../ImportJson/AssertImportJson.mjs")).AssertImportJson.new();
+        if (this.#import_json === null) {
+            try {
+                if (typeof process !== "undefined" || (navigator.userAgentData?.brands?.some(brand => brand.brand === "Chromium") ?? false)) {
+                    this.#import_json ??= (await import("../ImportJson/AssertImportJson.mjs")).AssertImportJson.new();
+
+                    return this.#import_json;
+                }
+            } catch (error) {
+                console.error(error);
             }
-        } catch (error) {
-            console.error(error);
+
+            console.info("Unsupported assert import - Using fetch fallback");
+
+            this.#import_json ??= (await import("../ImportJson/FetchImportJson.mjs")).FetchImportJson.new(
+                this.#fetch_api,
+                this.#json_cache
+            );
         }
 
-        console.info("Unsupported assert import - Using fetch fallback");
-
-        return (await import("../ImportJson/FetchImportJson.mjs")).FetchImportJson.new(
-            this.#fetch_api,
-            this.#json_cache
-        );
+        return this.#import_json;
     }
 
     /**
      * @returns {Promise<JsonService>}
      */
     async #getJsonService() {
-        return (await import("../../Service/Json/Port/JsonService.mjs")).JsonService.new(
-            this.#import_json
+        this.#json_service ??= (await import("../../Service/Json/Port/JsonService.mjs")).JsonService.new(
+            await this.#getImportJson()
         );
+
+        return this.#json_service;
     }
 }
