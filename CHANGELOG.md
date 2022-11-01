@@ -6,6 +6,12 @@ Changes:
 
 \-
 
+## v2022-11-01-1
+
+Changes:
+
+- `FetchApi` only needed using `FetchImportJson`
+
 ## v2022-10-28-1
 
 Changes:
