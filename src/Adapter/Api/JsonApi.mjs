@@ -6,7 +6,7 @@ import { JsonCache } from "../Cache/JsonCache.mjs";
 
 export class JsonApi {
     /**
-     * @type {FetchApi}
+     * @type {FetchApi | null}
      */
     #fetch_api;
     /**
@@ -23,17 +23,17 @@ export class JsonApi {
     #json_service = null;
 
     /**
-     * @param {FetchApi} fetch_api
+     * @param {FetchApi | null} fetch_api
      * @returns {JsonApi}
      */
-    static new(fetch_api) {
+    static new(fetch_api = null) {
         return new this(
             fetch_api
         );
     }
 
     /**
-     * @param {FetchApi} fetch_api
+     * @param {FetchApi | null} fetch_api
      * @private
      */
     constructor(fetch_api) {
@@ -70,6 +70,10 @@ export class JsonApi {
                 }
             } catch (error) {
                 console.error(error);
+            }
+
+            if (this.#fetch_api === null) {
+                throw new Error("Unsupported assert import - Can not use fetch fallback because missing FetchApi");
             }
 
             console.info("Unsupported assert import - Using fetch fallback");
