@@ -1,11 +1,11 @@
 {
     "name": "flux-json-api",
     "productName": "flux-json-api",
-    "version": "2022-11-01-1",
+    "version": "2022-11-16-1",
     "description": "",
     "keywords": [],
     "homepage": "",
-    "peerDependencies": {
+    "optionalDependencies": {
         "flux-fetch-api": "*"
     },
     "private": true
