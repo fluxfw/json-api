@@ -14,9 +14,9 @@ export class JsonApi {
      */
     #import_json = null;
     /**
-     * @type {JsonCache | null}
+     * @type {JsonCache}
      */
-    #json_cache = null;
+    #json_cache;
     /**
      * @type {JsonService | null}
      */
@@ -38,13 +38,7 @@ export class JsonApi {
      */
     constructor(fetch_api) {
         this.#fetch_api = fetch_api;
-    }
-
-    /**
-     * @returns {Promise<void>}
-     */
-    async init() {
-        this.#json_cache ??= new JsonCache();
+        this.#json_cache = new JsonCache();
     }
 
     /**

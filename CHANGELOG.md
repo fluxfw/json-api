@@ -6,6 +6,12 @@ Changes:
 
 \-
 
+## v2022-11-24-1
+
+Changes:
+
+- Remove empty `init`
+
 ## v2022-11-16-2
 
 Changes:
