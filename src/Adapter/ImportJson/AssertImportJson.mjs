@@ -1,4 +1,4 @@
-import { ASSERT_TYPE_JSON } from "../../../../flux-fetch-api/src/Adapter/AssertType/ASSERT_TYPE.mjs";
+import { ASSERT_TYPE_JSON } from "../../../../flux-http-api/src/Adapter/AssertType/ASSERT_TYPE.mjs";
 import { ImportJson } from "./ImportJson.mjs";
 
 export class AssertImportJson extends ImportJson {

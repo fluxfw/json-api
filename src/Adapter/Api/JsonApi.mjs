@@ -1,14 +1,14 @@
 import { JsonCache } from "../Cache/JsonCache.mjs";
 
-/** @typedef {import("../../../../flux-fetch-api/src/Adapter/Api/FetchApi.mjs").FetchApi} FetchApi */
+/** @typedef {import("../../../../flux-http-api/src/Adapter/Api/HttpApi.mjs").HttpApi} HttpApi */
 /** @typedef {import("../ImportJson/ImportJson.mjs").ImportJson} ImportJson */
 /** @typedef {import("../../Service/Json/Port/JsonService.mjs").JsonService} JsonService */
 
 export class JsonApi {
     /**
-     * @type {FetchApi | null}
+     * @type {HttpApi | null}
      */
-    #fetch_api;
+    #http_api;
     /**
      * @type {ImportJson | null}
      */
@@ -23,21 +23,21 @@ export class JsonApi {
     #json_service = null;
 
     /**
-     * @param {FetchApi | null} fetch_api
+     * @param {HttpApi | null} http_api
      * @returns {JsonApi}
      */
-    static new(fetch_api = null) {
+    static new(http_api = null) {
         return new this(
-            fetch_api
+            http_api
         );
     }
 
     /**
-     * @param {FetchApi | null} fetch_api
+     * @param {HttpApi | null} http_api
      * @private
      */
-    constructor(fetch_api) {
-        this.#fetch_api = fetch_api;
+    constructor(http_api) {
+        this.#http_api = http_api;
         this.#json_cache = new JsonCache();
     }
 
@@ -66,14 +66,14 @@ export class JsonApi {
                 console.error(error);
             }
 
-            if (this.#fetch_api === null) {
-                throw new Error("Unsupported assert import - Can not use fetch fallback because missing FetchApi");
+            if (this.#http_api === null) {
+                throw new Error("Unsupported assert import - Can not use fetch fallback because missing HttpApi");
             }
 
             console.info("Unsupported assert import - Using fetch fallback");
 
             this.#import_json ??= (await import("../ImportJson/FetchImportJson.mjs")).FetchImportJson.new(
-                this.#fetch_api,
+                this.#http_api,
                 this.#json_cache
             );
         }
