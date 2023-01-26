@@ -6,6 +6,12 @@ Changes:
 
 \-
 
+## v2023-01-26-1
+
+Changes:
+
+- `HttpRequest` / `HttpResponse`
+
 ## v2023-01-06-1
 
 Changes:

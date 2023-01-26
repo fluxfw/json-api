@@ -1,3 +1,6 @@
+import { CONTENT_TYPE_JSON } from "../../../../flux-http-api/src/Adapter/ContentType/CONTENT_TYPE.mjs";
+import { HEADER_ACCEPT } from "../../../../flux-http-api/src/Adapter/Header/HEADER.mjs";
+import { HttpClientRequest } from "../../../../flux-http-api/src/Adapter/Client/HttpClientRequest.mjs";
 import { ImportJson } from "./ImportJson.mjs";
 
 /** @typedef {import("../../../../flux-http-api/src/Adapter/Api/HttpApi.mjs").HttpApi} HttpApi */
@@ -47,12 +50,16 @@ export class FetchImportJson extends ImportJson {
         if (this.#json_cache.has(url)) {
             data = this.#json_cache.get(url);
         } else {
-            data = await this.#http_api.fetch(
-                {
+            data = await (await this.#http_api.fetch(
+                HttpClientRequest.new(
                     url,
-                    no_ui: true
-                }
-            );
+                    null,
+                    null,
+                    {
+                        [HEADER_ACCEPT]: CONTENT_TYPE_JSON
+                    }
+                )
+            )).body.json();
             this.#json_cache.set(url, data);
         }
 
