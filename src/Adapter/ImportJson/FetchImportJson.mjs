@@ -50,7 +50,7 @@ export class FetchImportJson extends ImportJson {
         if (this.#json_cache.has(url)) {
             data = this.#json_cache.get(url);
         } else {
-            data = await (await this.#http_api.fetch(
+            data = await (await this.#http_api.request(
                 HttpClientRequest.new(
                     url,
                     null,
