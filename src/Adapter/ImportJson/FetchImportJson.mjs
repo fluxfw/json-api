@@ -57,7 +57,8 @@ export class FetchImportJson extends ImportJson {
                     null,
                     {
                         [HEADER_ACCEPT]: CONTENT_TYPE_JSON
-                    }
+                    },
+                    true
                 )
             )).body.json();
             this.#json_cache.set(url, data);
